@@ -7,25 +7,39 @@ import multiprocessing as mp
 
 
 def query(location1, location2, gmaps, t, processNumber, return_dict):
-    df = pd.DataFrame(columns={"PID1", "PID2", "results"})
+    df = pd.DataFrame(columns={"PID1", "PID2", "time", "distance",'directions'})
 
     numQueries = len(location1) * len(location1)
     numQueriesExecuted = 0
 
     for i in location1.iterrows():
         for j in location2.iterrows():
-            address1 = i[1]['Address'] + ', Port Coquitlam, BC'
-            address2 = j[1]['Address'] + ', Port Coquitlam, BC'
+            if i[1]['PID']==j[1]['PID']:
+                continue
+            else:
+                # Adjusting addresses to make sure google finds them
+                address1 = i[1]['Address'] + ', Port Coquitlam, BC'
+                address2 = j[1]['Address'] + ', Port Coquitlam, BC'
 
-            directionsResult = gmaps.directions(origin=address1,
-                                                destination=address2,
-                                                mode="driving",
-                                                departure_time=t)
+                # Querying addresses
+                directionsResult = gmaps.directions(origin=address1,
+                                                    destination=address2,
+                                                    mode="driving",
+                                                    departure_time=t)
 
-            df = df.append({'PID1': i[1]['PID'], 'PID2': j[1]['PID'], 'results': directionsResult}, ignore_index=True)
-            numQueriesExecuted += 1
-            if numQueriesExecuted % 100 == 0:
-                print("Process:", processNumber, ',', (numQueriesExecuted / numQueries) * 100, 'Percent Complete')
+                # Extracting time, distance and directions
+                time = directionsResult[0]['legs'][0]['duration']['value']
+                distance = directionsResult[0]['legs'][0]['distance']['value']
+                directions = directionsResult[0]['legs'][0]['steps'] # Need to store this somehow
+
+                # Recording values in the df
+                df = df.append({'PID1': i[1]['PID'], 'PID2': j[1]['PID'], 'time': time, 'distance': distance, 'directions':directions}, ignore_index=True)
+
+                # Incrementing the number of queries....to create visual output so the progress can be assessed
+                numQueriesExecuted += 1
+                if numQueriesExecuted % 100 == 0:
+                    print("Process:", processNumber, ',', (numQueriesExecuted / numQueries) * 100, 'Percent Complete')
+
     return_dict[processNumber] = df
 
 
@@ -36,17 +50,20 @@ def main():
 
     df = pd.read_csv('locations.csv')
     df = df[['Address', 'Garbage Zone', 'PID']]
-    df = df.iloc[0:10, :]
+    df = df.iloc[0:2, :]
 
     queryTime = datetime(2021, 2, 2, 9, 0, 0)
 
     # Authenticating with api
     gmaps = googlemaps.Client(key=API_KEY)
 
-    numProcesses = 8
+    # Number of processes
+    numProcesses = 1
+
     processes = []
     manager = mp.Manager()
     return_dict = manager.dict()
+
     t0 = time.time()
     for process in range(0, numProcesses):
         processes.append(
@@ -60,6 +77,15 @@ def main():
         processes[process].join()
     t1 = time.time()
     print('Time:', t1 - t0)
+
+    results = return_dict[0]
+    if numProcesses > 1:
+        for process in range(1,numProcesses):
+            results = pd.concat([results,return_dict[process]],axis=0)
+
+    results.drop_duplicates(['PID1','PID2'], inplace=True)
+    results.reset_index()
+    results.to_csv('results.csv')
 
 
 if __name__ == '__main__':
