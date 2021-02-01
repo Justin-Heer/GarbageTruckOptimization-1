@@ -1,25 +1,66 @@
 import googlemaps
 from datetime import datetime, time
 from key import API_KEY
-import  time
+import time
+import pandas as pd
+import multiprocessing as mp
 
 
-# key.py contains a variable API_KEY that contains the key for google API.  See this page to create one https://developers.google.com/maps/documentation/geocoding/get-api-key and this one to get an account going https://developers.google.com/maps/gmp-get-started
+def query(location1, location2, gmaps, t, processNumber, return_dict):
+    df = pd.DataFrame(columns={"PID1", "PID2", "results"})
 
-# Authenticating with api
-gmaps = googlemaps.Client(key=API_KEY)
+    numQueries = len(location1) * len(location1)
+    numQueriesExecuted = 0
 
-now = datetime.now()
-nineAM = datetime(2021, 1, 31, 9, 0, 0)
-# We'll need to loop through all the addresses here
+    for i in location1.iterrows():
+        for j in location2.iterrows():
+            address1 = i[1]['Address'] + ', Port Coquitlam, BC'
+            address2 = j[1]['Address'] + ', Port Coquitlam, BC'
 
-t0 = time.time()
-directionsResult = gmaps.directions(origin='301 Stewardson Way, New Westminster, BC V3M 2A5',
-                                    destination='771 Sixth St, New Westminster, BC V3L 3C6',
-                                    mode="driving",
-                                    departure_time=nineAM)
-t1 = time.time()
-bruteForceTime = t1 - t0
-print(bruteForceTime)
+            directionsResult = gmaps.directions(origin=address1,
+                                                destination=address2,
+                                                mode="driving",
+                                                departure_time=t)
 
-print(directionsResult)
+            df = df.append({'PID1': i[1]['PID'], 'PID2': j[1]['PID'], 'results': directionsResult}, ignore_index=True)
+            numQueriesExecuted += 1
+            if numQueriesExecuted % 100 == 0:
+                print("Process:", processNumber, ',', (numQueriesExecuted / numQueries) * 100, 'Percent Complete')
+    return_dict[processNumber] = df
+
+
+def main():
+    # key.py contains a variable API_KEY that contains the key for google API.  See this page to create one
+    # https://developers.google.com/maps/documentation/geocoding/get-api-key and this one to get an account going
+    # https://developers.google.com/maps/gmp-get-started
+
+    df = pd.read_csv('locations.csv')
+    df = df[['Address', 'Garbage Zone', 'PID']]
+    df = df.iloc[0:10, :]
+
+    queryTime = datetime(2021, 2, 2, 9, 0, 0)
+
+    # Authenticating with api
+    gmaps = googlemaps.Client(key=API_KEY)
+
+    numProcesses = 8
+    processes = []
+    manager = mp.Manager()
+    return_dict = manager.dict()
+    t0 = time.time()
+    for process in range(0, numProcesses):
+        processes.append(
+            mp.Process(target=query, args=(df, df, gmaps, queryTime, process, return_dict))
+        )
+
+    for process in range(0, numProcesses):
+        processes[process].start()
+
+    for process in range(0, numProcesses):
+        processes[process].join()
+    t1 = time.time()
+    print('Time:', t1 - t0)
+
+
+if __name__ == '__main__':
+    main()
