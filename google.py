@@ -50,42 +50,44 @@ def main():
 
     df = pd.read_csv('locations.csv')
     df = df[['Address', 'Garbage Zone', 'PID']]
-    df = df.iloc[0:2, :]
+    df = df.iloc[0:10, :]
 
     queryTime = datetime(2021, 2, 2, 9, 0, 0)
 
     # Authenticating with api
     gmaps = googlemaps.Client(key=API_KEY)
 
-    # Number of processes
-    numProcesses = 1
+    print(gmaps.geocode('1430 nanaimo street, New Westminster, BC'))
 
-    processes = []
-    manager = mp.Manager()
-    return_dict = manager.dict()
-
-    t0 = time.time()
-    for process in range(0, numProcesses):
-        processes.append(
-            mp.Process(target=query, args=(df, df, gmaps, queryTime, process, return_dict))
-        )
-
-    for process in range(0, numProcesses):
-        processes[process].start()
-
-    for process in range(0, numProcesses):
-        processes[process].join()
-    t1 = time.time()
-    print('Time:', t1 - t0)
-
-    results = return_dict[0]
-    if numProcesses > 1:
-        for process in range(1,numProcesses):
-            results = pd.concat([results,return_dict[process]],axis=0)
-
-    results.drop_duplicates(['PID1','PID2'], inplace=True)
-    results.reset_index()
-    results.to_csv('results.csv')
+    # # Number of processes
+    # numProcesses = 1
+    #
+    # processes = []
+    # manager = mp.Manager()
+    # return_dict = manager.dict()
+    #
+    # t0 = time.time()
+    # for process in range(0, numProcesses):
+    #     processes.append(
+    #         mp.Process(target=query, args=(df, df, gmaps, queryTime, process, return_dict))
+    #     )
+    #
+    # for process in range(0, numProcesses):
+    #     processes[process].start()
+    #
+    # for process in range(0, numProcesses):
+    #     processes[process].join()
+    # t1 = time.time()
+    # print('Time:', t1 - t0)
+    #
+    # results = return_dict[0]
+    # if numProcesses > 1:
+    #     for process in range(1,numProcesses):
+    #         results = pd.concat([results,return_dict[process]],axis=0)
+    #
+    # results.drop_duplicates(['PID1','PID2'], inplace=True)
+    # results.reset_index()
+    # results.to_csv('results.csv')
 
 
 if __name__ == '__main__':
