@@ -132,7 +132,7 @@ def time_windows(zone, timeMatrixFiltered, maxTimeWindow):
     return timeWindows
 
 
-def create_route(timeMatrixFiltered, numVehicles, depotLocation, routeLimit, locations, processNumber, zone, maxTimeWindow):
+def create_route(timeMatrixFiltered, numVehicles, depotLocation, routeLimit, locations, processNumber, zone, maxTimeWindow, lock):
     # CITATION: https://developers.google.com/optimization/routing/vrp
     """Solve the CVRP problem."""
     print("In thread", processNumber)
@@ -200,12 +200,12 @@ def create_route(timeMatrixFiltered, numVehicles, depotLocation, routeLimit, loc
     search_parameters = pywrapcp.DefaultRoutingSearchParameters()
     search_parameters.first_solution_strategy = (
         routing_enums_pb2.FirstSolutionStrategy.SAVINGS)
-    search_parameters.local_search_metaheuristic = (
+    search_parameters.local_search_metaheuristic = (            # SOLUTION IMPROVEMENT
         routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC)
 
-    search_parameters.time_limit.seconds = 600
+    search_parameters.time_limit.seconds = 600     #
 
-    # search_parameters.solution_limit = 1
+    # search_parameters.solution_limit = 1       # Number of solutions
 
     # Solve the problem.
     print(f"Process: {processNumber}, starting")
@@ -213,8 +213,12 @@ def create_route(timeMatrixFiltered, numVehicles, depotLocation, routeLimit, loc
     print(f"Process: {processNumber}, Solver status:", solver_status(routing.status()))
 
     # Extracting the routes
-    print(f"Process: {processNumber}, extracting the routes")
-    routes = print_solution(data, manager, routing, solution, processNumber)
+    lock.acquire()
+    try:
+        print(f"Process: {processNumber}, extracting the routes")
+        routes = print_solution(data, manager, routing, solution, processNumber)
+    finally:
+        lock.release()
 
     print(f"Process: {processNumber}, creating tableau routes")
     tableauRoute = tableau_route(routes, locations, timeMatrixFiltered)
@@ -229,10 +233,8 @@ def main():
 
     # Reading in time matrix
     print("Reading in time matrix")
-    # timeMatrix = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/timeMatrixInflated.csv',
-    #                          index_col=0)
 
-    timeMatrix = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/timeMatrix.csv',
+    timeMatrix = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/timeMatrixInflated.csv',
                              index_col=0)
     timeMatrix = timeMatrix.iloc[timeMatrix.index != 'NO ADDRESS, Port Coquitlam, BC, Canada', timeMatrix.index != 'NO ADDRESS, Port Coquitlam, BC, Canada']  # Removing the pesky no address
 
@@ -266,11 +268,7 @@ def main():
         timeMatrixFiltered[zone] = timeMatrix.iloc[timeMatrix.index.isin(locationsByZonesFiltered.index),
                                                    timeMatrix.index.isin(locationsByZonesFiltered.index)]
 
-        # # ******** Delete this ************
-        # # elements = list(range(0, len(timeMatrixFiltered)))
-        # elements = list(range(0, 30))
-        # elements.append(1966)
-        # timeMatrixFiltered[zone] = timeMatrixFiltered[zone].iloc[elements, elements]
+
 
         # Storing the location of the depot in each subdivided time matrix in a dict
         depotLocations[zone] = np.where(timeMatrixFiltered[zone].index == '1737 Broadway St Port Coquitlam, BC, Canada')[0][0]
@@ -315,6 +313,7 @@ def main():
 
     print("Defining threads")
     processes = []
+    lock = mp.Lock()
     # Defining the threads
     for process in range(0, numProcesses):
         job = jobs[process]
@@ -327,7 +326,8 @@ def main():
                              locations,
                              process,
                              job['zone'],
-                             job['maxTimeWindow']
+                             job['maxTimeWindow'],
+                             lock
                              )
                        )
         )
