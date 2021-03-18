@@ -38,10 +38,10 @@ def print_solution(data, manager, routing, solution, processNumber):
         #                                             solution.Max(time_var))
         plan_output += 'Time of the route: {}min\n'.format(
             solution.Min(time_var))
-        print('Process:', processNumber, solution.Min(time_var))
+        print('Process:', processNumber, 'vehicle:', vehicle_id, solution.Min(time_var))
         #         print(plan_output)
         total_time += solution.Min(time_var)
-    print('Total time of all routes: {}min'.format(total_time))
+    print('Process:', processNumber, 'total time of all routes: {}min'.format(total_time))
     return routes
 
 
@@ -109,6 +109,25 @@ def time_windows(zone, timeMatrixFiltered, maxTimeWindow):
                 timeWindows.append((0, maxTimeWindow))
             else:
                 timeWindows.append((0, 50000))
+
+    if zone == 2:
+        for i in range(len(timeMatrixFiltered)):
+            house = timeMatrixFiltered.index[i].split(' ')
+            street = ' '.join(house[1:-4])
+
+            if street == 'OXFORD ST,' or street == 'CHALMERS AVE,':
+                timeWindows.append((0, maxTimeWindow))
+            else:
+                timeWindows.append((0, 50000))
+
+    if zone == 3 or zone == 4 or zone == 5:
+        for i in range(len(timeMatrixFiltered)):
+            house = timeMatrixFiltered.index[i].split(' ')
+            street = ' '.join(house[1:-4])
+
+            timeWindows.append((0, 50000))
+
+
 
     return timeWindows
 
@@ -181,10 +200,12 @@ def create_route(timeMatrixFiltered, numVehicles, depotLocation, routeLimit, loc
     search_parameters = pywrapcp.DefaultRoutingSearchParameters()
     search_parameters.first_solution_strategy = (
         routing_enums_pb2.FirstSolutionStrategy.SAVINGS)
+    search_parameters.local_search_metaheuristic = (
+        routing_enums_pb2.LocalSearchMetaheuristic.AUTOMATIC)
 
-    search_parameters.time_limit.seconds = 300
+    search_parameters.time_limit.seconds = 600
 
-    search_parameters.solution_limit = 1
+    # search_parameters.solution_limit = 1
 
     # Solve the problem.
     print(f"Process: {processNumber}, starting")
@@ -199,7 +220,7 @@ def create_route(timeMatrixFiltered, numVehicles, depotLocation, routeLimit, loc
     tableauRoute = tableau_route(routes, locations, timeMatrixFiltered)
 
     print(f"Process: {processNumber}, saving: ")
-    tableauRoute.to_csv(f"zone{zone}_{numVehicles}trucks.csv")
+    tableauRoute.to_csv(f"C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/routes/zone{zone}_{numVehicles}trucks.csv")
 
 
 def main():
@@ -208,7 +229,10 @@ def main():
 
     # Reading in time matrix
     print("Reading in time matrix")
-    timeMatrix = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/timeMatrixInflated.csv',
+    # timeMatrix = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/timeMatrixInflated.csv',
+    #                          index_col=0)
+
+    timeMatrix = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/timeMatrix.csv',
                              index_col=0)
     timeMatrix = timeMatrix.iloc[timeMatrix.index != 'NO ADDRESS, Port Coquitlam, BC, Canada', timeMatrix.index != 'NO ADDRESS, Port Coquitlam, BC, Canada']  # Removing the pesky no address
 
@@ -219,7 +243,7 @@ def main():
 
     # Reading in all locations
     print("Reading in locations")
-    locations = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/locations.csv', index_col=0)
+    locations = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/locations_updated.csv', index_col=0)
     locations = locations[locations.index != 'NO ADDRESS, Port Coquitlam, BC, Canada']  # Removing the pesky no address
 
     print('Dividing up the time matrix by zone')
@@ -227,8 +251,8 @@ def main():
     timeMatrixFiltered = {}  # Contains the time matrix
     depotLocations = {}  # Contains the depot location in each subdivided time matrix
     timeWindows = {}
-    # for zone in [1, 2, 3, 4, 5]:
-    for zone in [1]:
+    for zone in [1, 2, 3, 4, 5]:
+    # for zone in [1]:
         # Creating a row just for the depot
         depot = pd.Series({'Garbage Zone': np.float64(zone)}, name='1737 Broadway St Port Coquitlam, BC, Canada')
 
@@ -251,24 +275,43 @@ def main():
         # Storing the location of the depot in each subdivided time matrix in a dict
         depotLocations[zone] = np.where(timeMatrixFiltered[zone].index == '1737 Broadway St Port Coquitlam, BC, Canada')[0][0]
 
-    print(depotLocations)
+    # Creating jobs that need to be completed
+    # jobs = [{'zone': 1, 'numTrucks': 3, 'limit': 6900, 'maxTimeWindow': 5400},
+    #         {'zone': 1, 'numTrucks': 4, 'limit': 5325, 'maxTimeWindow': 3600},
+    #         {'zone': 1, 'numTrucks': 5, 'limit': 4500, 'maxTimeWindow': 3600},
+    #         {'zone': 1, 'numTrucks': 6, 'limit': 3900, 'maxTimeWindow': 3600},
+    #         {'zone': 1, 'numTrucks': 7, 'limit': 3500, 'maxTimeWindow': 3600}]
 
-    # # Creating jobs that need to be completed
-    # jobs = [{'zone': 4, 'numTrucks': 3, 'limit': 5600},  #
-    #         {'zone': 4, 'numTrucks': 4, 'limit': 4375},  #
-    #         {'zone': 4, 'numTrucks': 5, 'limit': 3600},
-    #         {'zone': 4, 'numTrucks': 6, 'limit': 3125},
-    #         {'zone': 4, 'numTrucks': 7, 'limit': 2750}]  #
-    jobs = [{'zone': 1, 'numTrucks': 3, 'limit': 6900, 'maxTimeWindow': 5400},
-            {'zone': 1, 'numTrucks': 4, 'limit': 5325, 'maxTimeWindow': 3600},
-            {'zone': 1, 'numTrucks': 5, 'limit': 4500, 'maxTimeWindow': 3600},
-            {'zone': 1, 'numTrucks': 6, 'limit': 3900, 'maxTimeWindow': 3600},
-            {'zone': 1, 'numTrucks': 7, 'limit': 3500, 'maxTimeWindow': 3600}]
-    # jobs = [{'zone': 2, 'numTrucks': 3, 'limit': 6900},
-    #         {'zone': 2, 'numTrucks': 4, 'limit': 5325},
-    #         {'zone': 2, 'numTrucks': 5, 'limit': 4500},
-    #         {'zone': 2, 'numTrucks': 6, 'limit': 3900},
-    #         {'zone': 2, 'numTrucks': 7, 'limit': 3500}]
+    jobs = [{'zone': 1, 'numTrucks': 3, 'limit': 5400, 'maxTimeWindow': 5400},
+            {'zone': 1, 'numTrucks': 4, 'limit': 5000, 'maxTimeWindow': 3600},
+            {'zone': 1, 'numTrucks': 5, 'limit': 4000, 'maxTimeWindow': 3600},
+            {'zone': 1, 'numTrucks': 6, 'limit': 3300, 'maxTimeWindow': 3600}, #
+            {'zone': 1, 'numTrucks': 7, 'limit': 2800, 'maxTimeWindow': 3600}] #
+
+    # jobs = [{'zone': 2, 'numTrucks': 3, 'limit': 7000, 'maxTimeWindow': 10000},  # USE .PATH_CHEAPEST_ARC for all of zone 2
+    #         {'zone': 2, 'numTrucks': 4, 'limit': 5400, 'maxTimeWindow': 10000},
+    #         {'zone': 2, 'numTrucks': 5, 'limit': 4500, 'maxTimeWindow': 3600},#
+    #         {'zone': 2, 'numTrucks': 6, 'limit': 4000, 'maxTimeWindow': 3600}, #
+    #         {'zone': 2, 'numTrucks': 7, 'limit': 3500, 'maxTimeWindow': 3600}] #
+
+    # jobs = [{'zone': 3, 'numTrucks': 3, 'limit': 6300, 'maxTimeWindow': 10000}, #
+    #         {'zone': 3, 'numTrucks': 4, 'limit': 5000, 'maxTimeWindow': 10000}, #
+    #         {'zone': 3, 'numTrucks': 5, 'limit': 4000, 'maxTimeWindow': 10000}, #
+    #         {'zone': 3, 'numTrucks': 6, 'limit': 3700, 'maxTimeWindow': 10000}, # USE .PATH_CHEAPEST_ARC for num trucks 6 and 7
+    #         {'zone': 3, 'numTrucks': 7, 'limit': 3500, 'maxTimeWindow': 10000}]
+
+    # jobs = [{'zone': 4, 'numTrucks': 3, 'limit': 5600, 'maxTimeWindow': 10000},
+    #         {'zone': 4, 'numTrucks': 4, 'limit': 4375, 'maxTimeWindow': 10000},
+    #         {'zone': 4, 'numTrucks': 5, 'limit': 3600, 'maxTimeWindow': 10000},
+    #         {'zone': 4, 'numTrucks': 6, 'limit': 3125, 'maxTimeWindow': 10000},
+    #         {'zone': 4, 'numTrucks': 7, 'limit': 2750, 'maxTimeWindow': 10000}]
+
+    # jobs = [{'zone': 5, 'numTrucks': 3, 'limit': 4500, 'maxTimeWindow': 10000},
+    #         {'zone': 5, 'numTrucks': 4, 'limit': 3400, 'maxTimeWindow': 10000}, #
+    #         {'zone': 5, 'numTrucks': 5, 'limit': 2800, 'maxTimeWindow': 10000}, #
+    #         {'zone': 5, 'numTrucks': 6, 'limit': 2500, 'maxTimeWindow': 10000}, #
+    #         {'zone': 5, 'numTrucks': 7, 'limit': 2100, 'maxTimeWindow': 10000}] #
+
 
     print("Defining threads")
     processes = []

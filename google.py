@@ -44,7 +44,7 @@ def main():
     df = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/Queries/depotQueries.csv', index_col=0)
 
     # IMPORTANT: PUT YOUR API KEY HERE
-    API_KEY =
+    API_KEY = ''
 
     # Defining the date/time we are requesting: 2021, March, 5, 12:00:00pm
     queryTime = datetime(2021, 3, 10, 12, 0, 0)
