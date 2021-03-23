@@ -32,7 +32,7 @@ def parse_query(df, pairID, process, lock, return_ls) -> list:
         
 
 def write_csv(ls,header) -> None:
-    with open('test.csv', 'w') as f:
+    with open('test.csv', 'w', newline='') as f:
 
         write = csv.writer(f)
 
