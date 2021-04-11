@@ -3,7 +3,9 @@ from datetime import datetime
 import pandas as pd
 import multiprocessing as mp
 import numpy as np
-import os
+"""
+This script queries the data from google using 8 concurrent threads
+"""
 
 
 def query(queries, gmaps, t, processNumber, return_dict):
@@ -41,13 +43,13 @@ def main():
     # https://developers.google.com/maps/gmp-get-started
 
     # IMPORTANT: READ IN THE RIGHT FILE HERE
-    df = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/Queries/depotQueries.csv', index_col=0)
+    df = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/directionsQueries/zone5_4trucks_directions.csv',index_col=0)
 
     # IMPORTANT: PUT YOUR API KEY HERE
-    API_KEY = ''
+    API_KEY = 'AIzaSyAP20gEEdPQIchk0V6fZXR8WKNQGmyten8'
 
-    # Defining the date/time we are requesting: 2021, March, 5, 12:00:00pm
-    queryTime = datetime(2021, 3, 10, 12, 0, 0)
+    # Defining the date/time we are requesting: 2021, April, 15, 12:00:00pm
+    queryTime = datetime(2021, 4, 15, 12, 0, 0)
 
     # Authenticating with api
     gmaps = googlemaps.Client(key=API_KEY)
@@ -92,9 +94,9 @@ def main():
     # Resetting the index
     results.reset_index()
 
-    results.to_csv('depot_results.csv')
+    results.to_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/Direction Queries Results/zone5_4trucks_directions_results.csv')
 
-    # # Checking to see if this is the second one, if yes incrementing the name so nothing gets overwritten
+    # Checking to see if this is the second one, if yes incrementing the name so nothing gets overwritten
     # if os.path.exists('extra_results1.csv'):
     #     results.to_csv('extra_results2.csv')
     # else:

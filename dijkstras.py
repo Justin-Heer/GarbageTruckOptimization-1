@@ -24,6 +24,7 @@ def createRoutes(locations, routes, start):
 
 
 def dijkstrasThread(graph, locations, rows, processNumber, travelTimesDict):
+    print(f"Process {processNumber} Started")
     # Defining data frame to hold shortest travel times
     results = pd.DataFrame(columns=locations)
 
@@ -52,20 +53,13 @@ def main():
     numProcesses = 8
     t0 = time.time()
     print("Reading in sparse Matrix")
-    sparseMatrix = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/sparseTimeMatrix.csv', index_col=0)
-    # sparseMatrix = pd.read_csv('delete.csv', index_col=0)
+    sparseMatrix = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/sparseTimeMatrixUpdated.csv', index_col=0)
 
     print("Defining Graph")
     graph = csr_matrix(sparseMatrix)
 
-
     # Creating the segments to divide up the dataframe between the threads
     segments = np.array_split(np.array(range(0, int(len(sparseMatrix)))), numProcesses)
-
-    # # Dividing up the threads
-    # dataFrames = []
-    # for i in segments:
-    #     dataFrames.append(sparseMatrix.iloc[i[0]: i[-1] + 1, ])
 
     # Creating the threads
     processes = []
@@ -102,10 +96,7 @@ def main():
 
     print("Saving to Disk")
 
-    # print(travelTimes)
-    # print(routes)
-    travelTimes.to_csv('travelTimes.csv')
-    # routes.to_csv('routes1.csv')
+    travelTimes.to_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/timeMatrixUpdated.csv')
 
 
 if __name__ == '__main__':
