@@ -226,7 +226,7 @@ def create_route(timeMatrixFiltered, numVehicles, depotLocation, routeLimit, loc
     tableauRoute = tableau_route(routes, locations, timeMatrixFiltered)
 
     print(f"Process: {processNumber}, saving: ")
-    tableauRoute.to_csv(f"C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/routes/zone{zone}_{numVehicles}trucks.csv")
+    tableauRoute.to_csv(f"zone{zone}_{numVehicles}trucks.csv")
 
 
 def main():
@@ -236,17 +236,17 @@ def main():
     # Reading in time matrix
     print("Reading in time matrix")
 
-    timeMatrix = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/timeMatrixInflated.csv',
+    timeMatrix = pd.read_csv('timeMatrixInflated.csv',
                              index_col=0)
     timeMatrix = timeMatrix.iloc[timeMatrix.index != 'NO ADDRESS, Port Coquitlam, BC, Canada', timeMatrix.index != 'NO ADDRESS, Port Coquitlam, BC, Canada']  # Removing the pesky no address
 
     # Reading in locations by zones
     print("Reading in locations by zone")
-    locationsByZones = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/finalLocations.csv', index_col=0)
+    locationsByZones = pd.read_csv('finalLocations.csv', index_col=0)
 
     # Reading in all locations
     print("Reading in locations")
-    locations = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/locationsUpdated.csv', index_col=0)
+    locations = pd.read_csv('locationsUpdated.csv', index_col=0)
     locations = locations[locations.index != 'NO ADDRESS, Port Coquitlam, BC, Canada']  # Removing the pesky no address
 
     print('Dividing up the time matrix by zone')

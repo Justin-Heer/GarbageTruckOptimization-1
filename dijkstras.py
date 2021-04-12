@@ -53,7 +53,7 @@ def main():
     numProcesses = 8
     t0 = time.time()
     print("Reading in sparse Matrix")
-    sparseMatrix = pd.read_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/sparseTimeMatrixUpdated.csv', index_col=0)
+    sparseMatrix = pd.read_csv('sparseTimeMatrixUpdated.csv', index_col=0)
 
     print("Defining Graph")
     graph = csr_matrix(sparseMatrix)
@@ -96,7 +96,7 @@ def main():
 
     print("Saving to Disk")
 
-    travelTimes.to_csv('C:/Users/Aidan/OneDrive - Simon Fraser University (1sfu)/Garbage Route Optimization/timeMatrixUpdated.csv')
+    travelTimes.to_csv('timeMatrixUpdated.csv')
 
 
 if __name__ == '__main__':

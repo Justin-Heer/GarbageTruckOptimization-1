@@ -43,7 +43,7 @@ def write_csv(ls,header) -> None:
 def main():
     # read in the queries that have already been made
     print(f"reading in data")
-    df = pd.read_csv('google-distance-csvs//JustinResults1.csv',usecols=['directions'],nrows=100)
+    df = pd.read_csv('google-distance-csvs//Results1.csv',usecols=['directions'],nrows=100)
 
     NUM_PROCESSES = 6                                    #SET THIS VALUE 
 

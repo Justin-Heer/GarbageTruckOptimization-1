@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0041d169-2928-4b2b-9e71-7ad3d46bf6e3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/dijkstras.py" beforeDir="false" afterPath="$PROJECT_DIR$/dijkstras.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/google-query-to-tableau.py" beforeDir="false" afterPath="$PROJECT_DIR$/google-query-to-tableau.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hierarchicalClustering.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vehicle_routing.py" beforeDir="false" afterPath="$PROJECT_DIR$/vehicle_routing.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="Jupyter Notebook" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1nctQXuiy4dOKFydtullOVwRTIg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Aidan\Documents\Git Repositories\GarbageTruckOptimization" />
+      <recent name="C:\Users\Aidan\Documents\Git Repositories\GarbageTruckOptimization\extracts" />
+      <recent name="C:\Users\Aidan\Documents\Git Repositories\GarbageTruckOptimization\exports" />
+      <recent name="C:\Users\Aidan\Documents\Git Repositories" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Aidan\Documents\Git Repositories\GarbageTruckOptimization" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.google">
+    <configuration name="addressManipulation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GarbageTruckOptimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/addressManipulation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="dijkstras" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GarbageTruckOptimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dijkstras.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="google" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GarbageTruckOptimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/google.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="queryCreator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GarbageTruckOptimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/queryCreator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="vehicle_routing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GarbageTruckOptimization" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vehicle_routing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.google" />
+        <item itemvalue="Python.vehicle_routing" />
+        <item itemvalue="Python.dijkstras" />
+        <item itemvalue="Python.queryCreator" />
+        <item itemvalue="Python.addressManipulation" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0041d169-2928-4b2b-9e71-7ad3d46bf6e3" name="Default Changelist" comment="" />
+      <created>1611701191306</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611701191306</updated>
+      <workItem from="1611701193042" duration="5457000" />
+      <workItem from="1611718487356" duration="112000" />
+      <workItem from="1611768856286" duration="3965000" />
+      <workItem from="1611875820181" duration="73000" />
+      <workItem from="1611980351572" duration="944000" />
+      <workItem from="1612047031335" duration="1395000" />
+      <workItem from="1612050307599" duration="1271000" />
+      <workItem from="1612135757738" duration="49000" />
+      <workItem from="1612200445383" duration="8387000" />
+      <workItem from="1612223733930" duration="1296000" />
+      <workItem from="1612232367526" duration="30000" />
+      <workItem from="1612928275026" duration="570000" />
+      <workItem from="1612930345295" duration="367000" />
+      <workItem from="1613068621362" duration="7921000" />
+      <workItem from="1613087518665" duration="609000" />
+      <workItem from="1613151933880" duration="596000" />
+      <workItem from="1613414306421" duration="1530000" />
+      <workItem from="1613603107829" duration="829000" />
+      <workItem from="1613607657287" duration="645000" />
+      <workItem from="1613790595966" duration="1111000" />
+      <workItem from="1613879101382" duration="5885000" />
+      <workItem from="1613946553899" duration="2819000" />
+      <workItem from="1613961757962" duration="1598000" />
+      <workItem from="1614053204161" duration="451000" />
+      <workItem from="1614102549817" duration="4224000" />
+      <workItem from="1614139838646" duration="605000" />
+      <workItem from="1614276302196" duration="652000" />
+      <workItem from="1614277321735" duration="5433000" />
+      <workItem from="1614393293687" duration="40000" />
+      <workItem from="1614454715013" duration="4000" />
+      <workItem from="1614454967104" duration="7253000" />
+      <workItem from="1614533535719" duration="10739000" />
+      <workItem from="1614633566050" duration="599000" />
+      <workItem from="1614709212667" duration="1082000" />
+      <workItem from="1614738309892" duration="2042000" />
+      <workItem from="1614822082853" duration="1792000" />
+      <workItem from="1614879032733" duration="1332000" />
+      <workItem from="1614886531014" duration="622000" />
+      <workItem from="1615161208207" duration="12000" />
+      <workItem from="1615161626013" duration="51000" />
+      <workItem from="1615224240389" duration="1224000" />
+      <workItem from="1615303719942" duration="3761000" />
+      <workItem from="1615333906038" duration="3550000" />
+      <workItem from="1615344717525" duration="9053000" />
+      <workItem from="1615397257906" duration="3400000" />
+      <workItem from="1615482307067" duration="1158000" />
+      <workItem from="1615569180082" duration="2425000" />
+      <workItem from="1615572076770" duration="10764000" />
+      <workItem from="1615738199910" duration="10739000" />
+      <workItem from="1615760319120" duration="584000" />
+      <workItem from="1615761317594" duration="299000" />
+      <workItem from="1615915968221" duration="4539000" />
+      <workItem from="1616083184934" duration="14707000" />
+      <workItem from="1616130296162" duration="1216000" />
+      <workItem from="1616171703885" duration="2309000" />
+      <workItem from="1616191037587" duration="48000" />
+      <workItem from="1616273964684" duration="10120000" />
+      <workItem from="1616370557943" duration="3532000" />
+      <workItem from="1616431386817" duration="8055000" />
+      <workItem from="1616455109641" duration="1264000" />
+      <workItem from="1616517782590" duration="944000" />
+      <workItem from="1616535011193" duration="331000" />
+      <workItem from="1616552729601" duration="63000" />
+      <workItem from="1616604478622" duration="2244000" />
+      <workItem from="1616640105031" duration="617000" />
+      <workItem from="1616688897142" duration="4296000" />
+      <workItem from="1616707974321" duration="9895000" />
+      <workItem from="1616775382639" duration="590000" />
+      <workItem from="1616776618419" duration="3208000" />
+      <workItem from="1616981557834" duration="2626000" />
+      <workItem from="1617300017299" duration="657000" />
+      <workItem from="1617674984152" duration="401000" />
+      <workItem from="1618165945948" duration="1652000" />
+      <workItem from="1618198081518" duration="1177000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/GarbageTruckOptimization$google.coverage" NAME="google Coverage Results" MODIFIED="1616795441304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GarbageTruckOptimization$addressManipulation.coverage" NAME="addressManipulation Coverage Results" MODIFIED="1611706086001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GarbageTruckOptimization$dijkstras.coverage" NAME="dijkstras Coverage Results" MODIFIED="1616712745347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GarbageTruckOptimization$vehicle_routing.coverage" NAME="vehicle_routing Coverage Results" MODIFIED="1616777498048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GarbageTruckOptimization$queryCreator.coverage" NAME="queryCreator Coverage Results" MODIFIED="1613086723202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
