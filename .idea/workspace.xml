@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0041d169-2928-4b2b-9e71-7ad3d46bf6e3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/dijkstras.py" beforeDir="false" afterPath="$PROJECT_DIR$/dijkstras.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/google-query-to-tableau.py" beforeDir="false" afterPath="$PROJECT_DIR$/google-query-to-tableau.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hierarchicalClustering.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vehicle_routing.py" beforeDir="false" afterPath="$PROJECT_DIR$/vehicle_routing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,7 +256,7 @@
       <workItem from="1617300017299" duration="657000" />
       <workItem from="1617674984152" duration="401000" />
       <workItem from="1618165945948" duration="1652000" />
-      <workItem from="1618198081518" duration="1177000" />
+      <workItem from="1618198081518" duration="1771000" />
     </task>
     <servers />
   </component>
