@@ -1,9 +1,12 @@
 # GarbageTruckOptimization
 
 This repository contains all the code used in the Optimization of the Routes of the Waste Collection Vehicles for the City of Port Coquitlam, BC, Canada.  Note, all underlying 
-data has been permanently deleted in keeping with Google's terms of service.  As such the code cannot be run as it currently stands.  This repy was made public for anyone who
-wishes to further undertake this project or similar, but they will have to generate their own data.
+data has been permanently deleted to abide by Google's terms of service, thus the repo cannot run on its own. However, if one wishes, they can query the appropriate datapoints using Google APIs (read below) and the code should operate with minor adjustments. 
 
+# What we did
+The city of Port Coquitlam wanted us to optimize their waste collection routes for munipical level house-to-house waste collection. We quieried the coordinates of each house, used some custom made,somewhat intelligent routing algorithm, Dijkstra's Algorithm and the Google Maps Directions API to generate the route times between houses. We then used Clarke Wright's Savings Algorithm (implemented by Google OR Tools) to determine the optimal routes. The details of the custom routing algorithm and parameter tuning are stated in our report. 
+
+# File Contents
 ## Report.pdf
 
 This document contains the written report that pertains to the project.
